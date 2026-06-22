@@ -3,13 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RetroWares - Consolas Retro</title>
+<title>RetroVerse - Consolas Retro</title>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   :root {
-    --purple: #7c3aed; --purple-dark: #4c1d95;
-    --amber: #f59e0b;
+    --purple: #7c3aed; --amber: #f59e0b;
     --dark: #0f0a1e; --card-bg: #1a1030;
     --text: #f3f0ff; --text-muted: #a78bfa;
     --border: rgba(124,58,237,0.3); --green: #22c55e;
@@ -47,6 +46,7 @@
   .badge-clasico { background: rgba(245,158,11,0.15); color: #fcd34d; }
   .badge-portatil { background: rgba(34,197,94,0.15); color: #86efac; }
   .badge-arcade { background: rgba(239,68,68,0.15); color: #fca5a5; }
+  .badge-coleccionable { background: rgba(236,72,153,0.15); color: #f9a8d4; }
   .product-name { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
   .product-year { font-size: 12px; color: var(--text-muted); margin-bottom: 8px; }
   .product-desc { font-size: 13px; color: var(--text-muted); line-height: 1.5; margin-bottom: 12px; }
@@ -102,7 +102,7 @@
 <body>
 
 <nav>
-  <div class="logo">RetroWares</div>
+  <div class="logo">RetroVerse</div>
   <div class="nav-links">
     <a>Consolas</a><a>Accesorios</a><a>Juegos</a><a>Nosotros</a>
   </div>
@@ -127,6 +127,7 @@
   <button class="filter-btn" onclick="filterProducts('clasico', this)">Clásico</button>
   <button class="filter-btn" onclick="filterProducts('portatil', this)">Portátil</button>
   <button class="filter-btn" onclick="filterProducts('arcade', this)">Arcade</button>
+  <button class="filter-btn" onclick="filterProducts('coleccionable', this)">Coleccionable</button>
 </div>
 
 <section class="products-section">
@@ -135,8 +136,8 @@
 </section>
 
 <footer>
-  <div class="footer-logo">RetroWares</div>
-  <p>© 2026 RetroWares — Todos los derechos reservados</p>
+  <div class="footer-logo">RetroVerse</div>
+  <p>© 2026 RetroVerse — Todos los derechos reservados</p>
 </footer>
 
 <div class="modal-overlay" id="modal" onclick="closeModal(event)">
@@ -167,31 +168,29 @@
 
 <script>
 const products = [
-  { id:"CON-001", nombre:"Nintendo Entertainment System", anio:1983, categoria:"clasico", emoji:"🎮", fabricante:"Nintendo", procesador:"Ricoh 2A03 (1.79 MHz)", ram:"2 KB", resolucion:"256×240 px", estado:"Excelente", incluye:"Control, cables, 2 juegos", precio:18500, stock:4, descripcion:"La NES que lo inició todo. Revivila con Super Mario Bros y Zelda." },
-  { id:"CON-002", nombre:"Sega Mega Drive", anio:1988, categoria:"retro", emoji:"🕹️", fabricante:"Sega", procesador:"Motorola 68000 (7.67 MHz)", ram:"64 KB", resolucion:"320×224 px", estado:"Muy bueno", incluye:"2 controles, cable de video", precio:22000, stock:2, descripcion:"El rival eterno de Nintendo. Sonic incluido en espíritu." },
-  { id:"CON-003", nombre:"Game Boy Color", anio:1998, categoria:"portatil", emoji:"👾", fabricante:"Nintendo", procesador:"Z80 mejorado (8 MHz)", ram:"32 KB", resolucion:"160×144 px", estado:"Bueno", incluye:"Con tapa protectora", precio:9800, stock:7, descripcion:"Pokémon, Tetris y aventuras donde quieras." },
-  { id:"CON-004", nombre:"Atari 2600", anio:1977, categoria:"retro", emoji:"📺", fabricante:"Atari Inc.", procesador:"MOS 6507 (1.19 MHz)", ram:"128 bytes", resolucion:"160×192 px", estado:"Bueno", incluye:"1 joystick, 3 cartuchos", precio:14500, stock:3, descripcion:"La pionera del gaming doméstico. Una pieza de historia." },
-  { id:"CON-005", nombre:"Arcade Cocktail Cabinet", anio:1982, categoria:"arcade", emoji:"🕹️", fabricante:"Múltiples", procesador:"Varios chips Z80", ram:"Múltiple", resolucion:"256×224 px", estado:"Restaurado", incluye:"1000 juegos preinstalados", precio:85000, stock:1, descripcion:"Mesa arcade de época restaurada. La experiencia completa." },
-  { id:"CON-006", nombre:"Super Nintendo (SNES)", anio:1990, categoria:"clasico", emoji:"🎯", fabricante:"Nintendo", procesador:"Ricoh 5A22 (3.58 MHz)", ram:"128 KB", resolucion:"256×224 px", estado:"Excelente", incluye:"2 controles, 1 juego, fuente", precio:25000, stock:5, descripcion:"El pico del 16 bits. Donkey Kong, Street Fighter, Zelda." },
-  { id:"CON-007", nombre:"PlayStation 1", anio:1994, categoria:"clasico", emoji:"💿", fabricante:"Sony", procesador:"MIPS R3000A (33 MHz)", ram:"2 MB", resolucion:"320×240 px", estado:"Muy bueno", incluye:"2 controles DualShock, memory card", precio:19900, stock:6, descripcion:"La primera PlayStation. Final Fantasy, Crash, Metal Gear." },
-  { id:"CON-008", nombre:"Sega Game Gear", anio:1990, categoria:"portatil", emoji:"🔋", fabricante:"Sega", procesador:"Z80 (3.58 MHz)", ram:"8 KB", resolucion:"160×144 px", estado:"Bueno", incluye:"Adaptador AC, funda", precio:11200, stock:3, descripcion:"La portátil a color que desafiaba la Game Boy." },
-  { id:"CON-008", nombre:"Nintendo Game Cube", anio:1990, categoria:"portatil", emoji:"🔋", fabricante:"Sega", procesador:"Z80 (3.58 MHz)", ram:"8 KB", resolucion:"160×144 px", estado:"Bueno", incluye:"Adaptador AC, funda", precio:11200, stock:3, descripcion:"La portátil a color que desafiaba la Game Boy." },
-  { id:"CON-008", nombre:"Nintendo 64", anio:1990, categoria:"portatil", emoji:"🔋", fabricante:"Sega", procesador:"Z80 (3.58 MHz)", ram:"8 KB", resolucion:"160×144 px", estado:"Bueno", incluye:"Adaptador AC, funda", precio:11200, stock:3, descripcion:"La portátil a color que desafiaba la Game Boy." },
-  { id:"CON-008", nombre:"Game Boy", anio:1990, categoria:"portatil", emoji:"🔋", fabricante:"Sega", procesador:"Z80 (3.58 MHz)", ram:"8 KB", resolucion:"160×144 px", estado:"Bueno", incluye:"Adaptador AC, funda", precio:11200, stock:3, descripcion:"La portátil a color que desafiaba la Game Boy." },
-  { id:"CON-008", nombre:"Game Boy Advance", anio:1990, categoria:"portatil", emoji:"🔋", fabricante:"Sega", procesador:"Z80 (3.58 MHz)", ram:"8 KB", resolucion:"160×144 px", estado:"Bueno", incluye:"Adaptador AC, funda", precio:11200, stock:3, descripcion:"La portátil a color que desafiaba la Game Boy." },
-  { id:"CON-008", nombre:"Game Boy SP", anio:1990, categoria:"portatil", emoji:"🔋", fabricante:"Sega", procesador:"Z80 (3.58 MHz)", ram:"8 KB", resolucion:"160×144 px", estado:"Bueno", incluye:"Adaptador AC, funda", precio:11200, stock:3, descripcion:"La portátil a color que desafiaba la Game Boy." },
-  { id:"CON-008", nombre:"Sega Master System", anio:1990, categoria:"portatil", emoji:"🔋", fabricante:"Sega", procesador:"Z80 (3.58 MHz)", ram:"8 KB", resolucion:"160×144 px", estado:"Bueno", incluye:"Adaptador AC, funda", precio:11200, stock:3, descripcion:"La portátil a color que desafiaba la Game Boy." },
-  { id:"CON-008", nombre:"Sega Saturn", anio:1990, categoria:"portatil", emoji:"🔋", fabricante:"Sega", procesador:"Z80 (3.58 MHz)", ram:"8 KB", resolucion:"160×144 px", estado:"Bueno", incluye:"Adaptador AC, funda", precio:11200, stock:3, descripcion:"La portátil a color que desafiaba la Game Boy." },
-  { id:"CON-008", nombre:"Sega Dreamcast", anio:1990, categoria:"portatil", emoji:"🔋", fabricante:"Sega", procesador:"Z80 (3.58 MHz)", ram:"8 KB", resolucion:"160×144 px", estado:"Bueno", incluye:"Adaptador AC, funda", precio:11200, stock:3, descripcion:"La portátil a color que desafiaba la Game Boy." },
-  { id:"CON-008", nombre:"PlayStation 2", anio:1990, categoria:"portatil", emoji:"🔋", fabricante:"Sega", procesador:"Z80 (3.58 MHz)", ram:"8 KB", resolucion:"160×144 px", estado:"Bueno", incluye:"Adaptador AC, funda", precio:11200, stock:3, descripcion:"La portátil a color que desafiaba la Game Boy." },
-  { id:"CON-008", nombre:"Xbox", anio:1990, categoria:"portatil", emoji:"🔋", fabricante:"Sega", procesador:"Z80 (3.58 MHz)", ram:"8 KB", resolucion:"160×144 px", estado:"Bueno", incluye:"Adaptador AC, funda", precio:11200, stock:3, descripcion:"La portátil a color que desafiaba la Game Boy." },
-  { id:"CON-008", nombre:"Neo Geo AES", anio:1990, categoria:"portatil", emoji:"🔋", fabricante:"Sega", procesador:"Z80 (3.58 MHz)", ram:"8 KB", resolucion:"160×144 px", estado:"Bueno", incluye:"Adaptador AC, funda", precio:11200, stock:3, descripcion:"La portátil a color que desafiaba la Game Boy." },
-  { id:"CON-008", nombre:"Neo Geo Pocket Color", anio:1990, categoria:"portatil", emoji:"🔋", fabricante:"Sega", procesador:"Z80 (3.58 MHz)", ram:"8 KB", resolucion:"160×144 px", estado:"Bueno", incluye:"Adaptador AC, funda", precio:11200, stock:3, descripcion:"La portátil a color que desafiaba la Game Boy." },
+  { id:"CON-001", nombre:"Nintendo Entertainment System", anio:1983, categoria:"clasico", emoji:"🎮", fabricante:"Nintendo", procesador:"Ricoh 2A03 (1.79 MHz)", ram:"2 KB", resolucion:"256×240 px", estado:"Excelente", incluye:"1 control, cables AV, 2 juegos", precio:18500, stock:4, descripcion:"La NES que lo inició todo. Super Mario Bros, Zelda y Contra en una sola caja gris." },
+  { id:"CON-002", nombre:"Sega Mega Drive", anio:1988, categoria:"retro", emoji:"🕹️", fabricante:"Sega", procesador:"Motorola 68000 (7.67 MHz)", ram:"64 KB", resolucion:"320×224 px", estado:"Muy bueno", incluye:"2 controles de 6 botones, cable de video", precio:22000, stock:2, descripcion:"El rival eterno de Nintendo. Sonic, Streets of Rage y Mortal Kombat en su mejor versión." },
+  { id:"CON-003", nombre:"Game Boy Color", anio:1998, categoria:"portatil", emoji:"👾", fabricante:"Nintendo", procesador:"Z80 mejorado (8 MHz)", ram:"32 KB", resolucion:"160×144 px", estado:"Bueno", incluye:"Con tapa protectora original", precio:9800, stock:7, descripcion:"Pokémon Oro y Plata, Tetris DX y Link's Awakening DX en la palma de tu mano." },
+  { id:"CON-004", nombre:"Atari 2600", anio:1977, categoria:"retro", emoji:"📺", fabricante:"Atari Inc.", procesador:"MOS 6507 (1.19 MHz)", ram:"128 bytes", resolucion:"160×192 px", estado:"Bueno", incluye:"1 joystick, 3 cartuchos clásicos", precio:14500, stock:3, descripcion:"La pionera del gaming doméstico. Pitfall, Space Invaders y Pac-Man en la sala de tu casa." },
+  { id:"CON-005", nombre:"Arcade Cocktail Cabinet", anio:1982, categoria:"arcade", emoji:"🕹️", fabricante:"Múltiples", procesador:"Varios chips Z80", ram:"Múltiple", resolucion:"256×224 px", estado:"Restaurado", incluye:"1000 juegos preinstalados, 2 joysticks", precio:85000, stock:1, descripcion:"Mesa arcade de época completamente restaurada. Galaga, Donkey Kong y Pac-Man como en el salón." },
+  { id:"CON-006", nombre:"Super Nintendo (SNES)", anio:1990, categoria:"clasico", emoji:"🎯", fabricante:"Nintendo", procesador:"Ricoh 5A22 (3.58 MHz)", ram:"128 KB", resolucion:"256×224 px", estado:"Excelente", incluye:"2 controles, Super Mario World, fuente", precio:25000, stock:5, descripcion:"El pico dorado del 16 bits. Donkey Kong Country, Street Fighter II y Zelda: A Link to the Past." },
+  { id:"CON-007", nombre:"PlayStation 1", anio:1994, categoria:"clasico", emoji:"💿", fabricante:"Sony", procesador:"MIPS R3000A (33 MHz)", ram:"2 MB", resolucion:"320×240 px", estado:"Muy bueno", incluye:"2 controles DualShock, memory card", precio:19900, stock:6, descripcion:"La primera PlayStation que cambió el gaming para siempre. Final Fantasy VII, Crash y Metal Gear Solid." },
+  { id:"CON-008", nombre:"Sega Game Gear", anio:1990, categoria:"portatil", emoji:"🔋", fabricante:"Sega", procesador:"Z80 (3.58 MHz)", ram:"8 KB", resolucion:"160×144 px", estado:"Bueno", incluye:"Adaptador AC, funda de transporte", precio:11200, stock:3, descripcion:"La portátil a color que desafiaba la Game Boy. Pantalla retroiluminada y biblioteca de más de 300 juegos." },
+  { id:"CON-009", nombre:"Nintendo GameCube", anio:2001, categoria:"clasico", emoji:"🟣", fabricante:"Nintendo", procesador:"IBM PowerPC Gekko (485 MHz)", ram:"24 MB", resolucion:"480p (Progressive Scan)", estado:"Muy bueno", incluye:"1 control violeta, cable AV, memoria de 59 bloques", precio:32000, stock:4, descripcion:"El cubo morado más querido del gaming. Super Smash Bros Melee, Mario Kart Double Dash y Zelda Wind Waker." },
+  { id:"CON-010", nombre:"Nintendo 64", anio:1996, categoria:"clasico", emoji:"🎌", fabricante:"Nintendo", procesador:"NEC VR4300 (93.75 MHz)", ram:"4 MB (expansible a 8 MB)", resolucion:"240p / 480i", estado:"Excelente", incluye:"1 control con rumble pak, Super Mario 64", precio:28500, stock:3, descripcion:"La revolución del 3D. Mario 64, Ocarina of Time y GoldenEye definieron una generación entera." },
+  { id:"CON-011", nombre:"Game Boy", anio:1989, categoria:"portatil", emoji:"🟩", fabricante:"Nintendo", procesador:"Sharp LR35902 (4.19 MHz)", ram:"8 KB", resolucion:"160×144 px (escala de grises)", estado:"Bueno", incluye:"Tetris, funda de tela original", precio:7500, stock:5, descripcion:"La abuela de todas las portátiles. Tetris, Pokémon Rojo y Azul y Link's Awakening en pantalla verde." },
+  { id:"CON-012", nombre:"Game Boy Advance", anio:2001, categoria:"portatil", emoji:"🔵", fabricante:"Nintendo", procesador:"ARM7TDMI (16.78 MHz)", ram:"32 KB", resolucion:"240×160 px", estado:"Muy bueno", incluye:"Cable link, 2 juegos, funda", precio:12000, stock:4, descripcion:"16 bits en el bolsillo. Pokémon Rubí y Zafiro, Metroid Fusion y los remakes de SNES brillaron aquí." },
+  { id:"CON-013", nombre:"Game Boy Advance SP", anio:2003, categoria:"portatil", emoji:"🌟", fabricante:"Nintendo", procesador:"ARM7TDMI (16.78 MHz)", ram:"32 KB", resolucion:"240×160 px", estado:"Excelente", incluye:"Cargador original, 1 juego", precio:14500, stock:3, descripcion:"La evolución plegable del GBA con pantalla retroiluminada. El diseño clamshell que todos querían tener." },
+  { id:"CON-014", nombre:"Sega Master System", anio:1986, categoria:"retro", emoji:"⬛", fabricante:"Sega", procesador:"Z80A (3.58 MHz)", ram:"8 KB", resolucion:"256×192 px", estado:"Bueno", incluye:"Control tipo pistola, 2 cartuchos", precio:13000, stock:2, descripcion:"La respuesta de Sega a la NES. Alex Kidd, Sonic y Wonder Boy en una máquina robusta y confiable." },
+  { id:"CON-015", nombre:"Sega Saturn", anio:1994, categoria:"coleccionable", emoji:"🪐", fabricante:"Sega", procesador:"2× Hitachi SH-2 (28.6 MHz c/u)", ram:"2 MB", resolucion:"320×240 px", estado:"Muy bueno", incluye:"2 controles, 1 juego japonés, memory card", precio:45000, stock:2, descripcion:"La joya incomprendida de Sega. Panzer Dragoon Saga, Radiant Silvergun y Nights son piezas de museo." },
+  { id:"CON-016", nombre:"Sega Dreamcast", anio:1998, categoria:"coleccionable", emoji:"🌀", fabricante:"Sega", procesador:"Hitachi SH-4 (200 MHz)", ram:"16 MB", resolucion:"640×480 px", estado:"Excelente", incluye:"2 controles con VMU, cable VGA, 3 juegos", precio:52000, stock:1, descripcion:"La última consola de Sega y adelantada a su tiempo. Shenmue, Jet Set Radio y Soul Calibur siguen sin envejecer." },
+  { id:"CON-017", nombre:"PlayStation 2", anio:2000, categoria:"clasico", emoji:"💽", fabricante:"Sony", procesador:"Emotion Engine (294 MHz)", ram:"32 MB", resolucion:"480i / 480p / 1080i", estado:"Muy bueno", incluye:"2 controles DualShock 2, memory card 8 MB", precio:24000, stock:5, descripcion:"La consola más vendida de la historia. GTA San Andreas, Shadow of the Colossus y God of War en su mejor versión." },
+  { id:"CON-018", nombre:"Xbox Original", anio:2001, categoria:"clasico", emoji:"🟢", fabricante:"Microsoft", procesador:"Intel Pentium III (733 MHz)", ram:"64 MB", resolucion:"480p / 720p / 1080i", estado:"Bueno", incluye:"2 controles Duke, cable AV, Halo Combat Evolved", precio:21000, stock:3, descripcion:"El debut de Microsoft en el gaming. Halo definió los shooters de consola y el Xbox Live cambió el juego online." },
+  { id:"CON-019", nombre:"Neo Geo AES", anio:1990, categoria:"coleccionable", emoji:"👑", fabricante:"SNK", procesador:"Motorola 68000 (12 MHz)", ram:"64 KB", resolucion:"320×224 px", estado:"Excelente", incluye:"2 joysticks arcade originales, 1 cartucho", precio:120000, stock:1, descripcion:"La consola arcade para el hogar más poderosa de su época. King of Fighters, Metal Slug y Samurai Shodown son leyenda." },
+  { id:"CON-020", nombre:"Neo Geo Pocket Color", anio:1999, categoria:"portatil", emoji:"🎴", fabricante:"SNK", procesador:"Toshiba TLCS900H (6.144 MHz)", ram:"64 KB", resolucion:"160×152 px", estado:"Muy bueno", incluye:"Funda rígida, cable link, 2 juegos SNK", precio:38000, stock:2, descripcion:"La portátil rival de la GBA con el mejor joystick táctil de la historia. King of Fighters R2 y Sonic Pocket Adventure." },
 ];
 
-// cart = { id -> cantidad }
 let cart = {};
-let currentModalId = null;
 
 function stockDisponible(id) {
   const p = products.find(x => x.id === id);
@@ -200,6 +199,14 @@ function stockDisponible(id) {
 
 function totalEnCarrito() {
   return Object.values(cart).reduce((s, q) => s + q, 0);
+}
+
+function getActiveFilter() {
+  const btn = document.querySelector('.filter-btn.active');
+  if (!btn) return 'todos';
+  const t = btn.textContent.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+  const map = { clasico:'clasico', retro:'retro', portatil:'portatil', arcade:'arcade', coleccionable:'coleccionable' };
+  return map[t] || 'todos';
 }
 
 function renderProducts(filter) {
@@ -219,9 +226,9 @@ function renderProducts(filter) {
         <div class="product-footer">
           <div>
             <div class="product-price">$${p.precio.toLocaleString('es-AR')}</div>
-            <div class="product-stock ${sinStock ? 'sin-stock' : ''}">${sinStock ? '✕ Sin stock' : '✓ ' + restante + ' disponibles'}</div>
+            <div class="product-stock ${sinStock?'sin-stock':''}">${sinStock ? '✕ Sin stock' : '✓ '+restante+' disponibles'}</div>
           </div>
-          <button class="add-cart-btn" id="btn-${p.id}" ${sinStock ? 'disabled' : ''} onclick="event.stopPropagation();addToCart('${p.id}')">
+          <button class="add-cart-btn" ${sinStock?'disabled':''} onclick="event.stopPropagation();addToCart('${p.id}')">
             ${sinStock ? 'Agotado' : '+ Agregar'}
           </button>
         </div>
@@ -237,7 +244,6 @@ function filterProducts(cat, btn) {
 }
 
 function openModal(id) {
-  currentModalId = id;
   const p = products.find(x => x.id === id);
   const restante = stockDisponible(id);
   const sinStock = restante <= 0;
@@ -263,42 +269,32 @@ function openModal(id) {
 }
 
 function closeModal(e) { if (e.target === document.getElementById('modal')) closeModalDirect(); }
-function closeModalDirect() { document.getElementById('modal').classList.remove('open'); currentModalId = null; }
+function closeModalDirect() { document.getElementById('modal').classList.remove('open'); }
 
 function addToCart(id) {
-  const restante = stockDisponible(id);
-  if (restante <= 0) { showToast('No hay más stock disponible', 'err'); return; }
+  if (stockDisponible(id) <= 0) { showToast('No hay más stock disponible', 'err'); return; }
   cart[id] = (cart[id] || 0) + 1;
   updateCart();
   const p = products.find(x => x.id === id);
   showToast(`${p.nombre} agregado ✓`, 'ok');
-  // re-render cards to update stock shown
-  const activeFilter = document.querySelector('.filter-btn.active');
-  const cat = activeFilter ? activeFilter.textContent.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"") : 'todos';
-  const map = {'clasico':'clasico','retro':'retro','portatil':'portatil','arcade':'arcade'};
-  renderProducts(map[cat] || 'todos');
+  renderProducts(getActiveFilter());
 }
 
 function changeQty(id, delta) {
-  const current = cart[id] || 0;
   const p = products.find(x => x.id === id);
-  const next = current + delta;
+  const next = (cart[id] || 0) + delta;
   if (next <= 0) { delete cart[id]; }
   else if (next > p.stock) { showToast('No hay más stock disponible', 'err'); return; }
   else { cart[id] = next; }
   updateCart();
-  const activeFilter = document.querySelector('.filter-btn.active');
-  const cat = activeFilter ? activeFilter.textContent.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"") : 'todos';
-  const map = {'clasico':'clasico','retro':'retro','portatil':'portatil','arcade':'arcade'};
-  renderProducts(map[cat] || 'todos');
+  renderProducts(getActiveFilter());
 }
 
 function updateCart() {
-  const total = totalEnCarrito();
-  document.getElementById('cartCount').textContent = total;
-  const items = document.getElementById('cartItems');
+  document.getElementById('cartCount').textContent = totalEnCarrito();
   const ids = Object.keys(cart).filter(id => cart[id] > 0);
-  if (ids.length === 0) {
+  const items = document.getElementById('cartItems');
+  if (!ids.length) {
     items.innerHTML = '<p class="empty-cart">Tu carrito está vacío</p>';
     document.getElementById('cartTotal').textContent = '$0';
     return;
@@ -306,7 +302,6 @@ function updateCart() {
   items.innerHTML = ids.map(id => {
     const p = products.find(x => x.id === id);
     const qty = cart[id];
-    const subtotal = p.precio * qty;
     return `
     <div class="cart-item">
       <span class="cart-item-emoji">${p.emoji}</span>
@@ -315,34 +310,30 @@ function updateCart() {
         <div class="cart-item-qty">$${p.precio.toLocaleString('es-AR')} c/u</div>
       </div>
       <div class="cart-item-right">
-        <span class="cart-item-price">$${subtotal.toLocaleString('es-AR')}</span>
+        <span class="cart-item-price">$${(p.precio*qty).toLocaleString('es-AR')}</span>
         <div class="qty-controls">
           <button class="qty-btn" onclick="changeQty('${id}',-1)">−</button>
           <span class="qty-num">${qty}</span>
-          <button class="qty-btn" onclick="changeQty('${id}',1)" ${qty >= p.stock ? 'disabled' : ''}>+</button>
+          <button class="qty-btn" onclick="changeQty('${id}',1)" ${qty>=p.stock?'disabled':''}>+</button>
         </div>
       </div>
     </div>`;
   }).join('');
-  const grandTotal = ids.reduce((s, id) => s + products.find(x=>x.id===id).precio * cart[id], 0);
-  document.getElementById('cartTotal').textContent = `$${grandTotal.toLocaleString('es-AR')}`;
+  document.getElementById('cartTotal').textContent = `$${ids.reduce((s,id)=>s+products.find(x=>x.id===id).precio*cart[id],0).toLocaleString('es-AR')}`;
 }
 
 function toggleCart() { document.getElementById('cartPanel').classList.toggle('open'); }
 
 function checkout() {
-  if (totalEnCarrito() === 0) { showToast('Agregá productos primero', 'err'); return; }
+  if (!totalEnCarrito()) { showToast('Agregá productos primero', 'err'); return; }
   cart = {}; updateCart(); toggleCart();
-  renderProducts('todos');
-  document.querySelectorAll('.filter-btn').forEach((b,i) => b.classList.toggle('active', i===0));
+  renderProducts(getActiveFilter());
   showToast('¡Compra realizada! Gracias por tu pedido 🎮', 'ok');
 }
 
 function showToast(msg, type) {
   const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.className = `toast ${type}`;
-  t.classList.add('show');
+  t.textContent = msg; t.className = `toast ${type} show`;
   setTimeout(() => t.classList.remove('show'), 2500);
 }
 
