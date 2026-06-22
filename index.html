@@ -33,26 +33,65 @@
   .btn-secondary { background: transparent; color: var(--text-muted); border: 1px solid var(--border); padding: 12px 24px; border-radius: 8px; font-size: 14px; cursor: pointer; font-family: 'Inter', sans-serif; }
 
   /* Section tabs */
-  .section-tabs { display: flex; gap: 0; border-bottom: 2px solid var(--border); background: rgba(15,10,30,0.8); position: sticky; top: 60px; z-index: 90; }
+  .section-tabs { display: flex; border-bottom: 2px solid var(--border); background: rgba(15,10,30,0.8); position: sticky; top: 60px; z-index: 90; }
   .tab-btn { background: transparent; color: var(--text-muted); border: none; border-bottom: 2px solid transparent; margin-bottom: -2px; padding: 14px 28px; font-size: 14px; font-weight: 500; cursor: pointer; font-family: 'Inter', sans-serif; transition: all 0.2s; display: flex; align-items: center; gap: 8px; }
   .tab-btn:hover { color: var(--text); }
   .tab-btn.active { color: var(--amber); border-bottom-color: var(--amber); }
-  .tab-icon { font-size: 16px; }
 
   .catalog-section { display: none; }
   .catalog-section.active { display: block; }
 
-  .filters { padding: 1.5rem 2rem; display: flex; gap: 0.75rem; flex-wrap: wrap; border-bottom: 1px solid var(--border); background: rgba(26,16,48,0.5); }
-  .filter-btn { background: transparent; color: var(--text-muted); border: 1px solid var(--border); padding: 6px 14px; border-radius: 20px; font-size: 13px; cursor: pointer; font-family: 'Inter', sans-serif; transition: all 0.2s; }
-  .filter-btn.active, .filter-btn:hover { background: var(--purple); color: white; border-color: var(--purple); }
+  /* ── ADVANCED FILTER PANEL ── */
+  .filter-panel { background: rgba(26,16,48,0.7); border-bottom: 1px solid var(--border); padding: 0; overflow: hidden; transition: max-height 0.3s ease; }
+  .filter-panel-inner { padding: 1.25rem 2rem; display: flex; gap: 2rem; flex-wrap: wrap; align-items: flex-start; }
+
+  .filter-toggle-bar { display: flex; align-items: center; justify-content: space-between; padding: 0.75rem 2rem; border-bottom: 1px solid rgba(124,58,237,0.15); cursor: pointer; user-select: none; }
+  .filter-toggle-left { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--text-muted); }
+  .filter-toggle-icon { font-size: 15px; transition: transform 0.25s; }
+  .filter-toggle-icon.open { transform: rotate(180deg); }
+  .active-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+  .active-tag { background: rgba(124,58,237,0.25); border: 1px solid rgba(124,58,237,0.5); color: #c4b5fd; font-size: 11px; padding: 2px 8px; border-radius: 10px; display: flex; align-items: center; gap: 4px; }
+  .active-tag button { background: none; border: none; color: #c4b5fd; cursor: pointer; font-size: 13px; line-height: 1; padding: 0; }
+  .filter-toggle-right { display: flex; align-items: center; gap: 12px; }
+  .result-count { font-size: 12px; color: var(--text-muted); }
+  .clear-all-btn { font-size: 12px; color: #ef4444; background: none; border: none; cursor: pointer; font-family: 'Inter', sans-serif; opacity: 0; transition: opacity 0.2s; pointer-events: none; }
+  .clear-all-btn.visible { opacity: 1; pointer-events: auto; }
+
+  .filter-group { display: flex; flex-direction: column; gap: 8px; min-width: 160px; }
+  .filter-group-label { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; }
+  .filter-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip { background: transparent; color: var(--text-muted); border: 1px solid var(--border); padding: 5px 12px; border-radius: 20px; font-size: 12px; cursor: pointer; font-family: 'Inter', sans-serif; transition: all 0.15s; white-space: nowrap; }
+  .chip:hover { border-color: var(--purple); color: var(--text); }
+  .chip.active { background: var(--purple); color: white; border-color: var(--purple); }
+
+  .filter-divider { width: 1px; background: var(--border); align-self: stretch; margin: 0 0.25rem; }
+
+  /* products */
   .products-section { padding: 2rem; }
-  .section-title { font-size: 20px; font-weight: 600; margin-bottom: 1.5rem; }
+  .section-header { display: flex; align-items: baseline; gap: 12px; margin-bottom: 1.5rem; }
+  .section-title { font-size: 20px; font-weight: 600; }
+  .section-count { font-size: 13px; color: var(--text-muted); }
   .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.25rem; }
+  .empty-state { text-align: center; padding: 4rem 2rem; color: var(--text-muted); }
+  .empty-state-icon { font-size: 48px; margin-bottom: 1rem; }
+  .empty-state p { font-size: 15px; margin-bottom: 0.5rem; color: var(--text); }
+  .empty-state span { font-size: 13px; }
+  .empty-state-reset { margin-top: 1rem; background: transparent; border: 1px solid var(--border); color: var(--text-muted); padding: 8px 16px; border-radius: 8px; cursor: pointer; font-family: 'Inter', sans-serif; font-size: 13px; }
+  .empty-state-reset:hover { border-color: var(--purple); color: var(--text); }
+
   .product-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; transition: border-color 0.2s, transform 0.2s; cursor: pointer; }
   .product-card:hover { border-color: var(--purple); transform: translateY(-2px); }
   .product-img { width: 100%; height: 160px; display: flex; align-items: center; justify-content: center; font-size: 60px; background: rgba(124,58,237,0.08); border-bottom: 1px solid var(--border); }
   .product-info { padding: 1rem; }
-  .product-badge { display: inline-block; font-size: 11px; padding: 3px 8px; border-radius: 4px; margin-bottom: 6px; font-weight: 500; }
+  .product-badges { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 6px; }
+  .product-badge { display: inline-block; font-size: 11px; padding: 3px 8px; border-radius: 4px; font-weight: 500; }
+  .badge-estado-excelente { background: rgba(34,197,94,0.15); color: #86efac; }
+  .badge-estado-muybueno { background: rgba(14,165,233,0.15); color: #7dd3fc; }
+  .badge-estado-bueno { background: rgba(245,158,11,0.15); color: #fcd34d; }
+  .badge-estado-restaurado { background: rgba(236,72,153,0.15); color: #f9a8d4; }
+  .badge-estado-nuevo { background: rgba(34,197,94,0.2); color: #4ade80; }
+  .badge-estado-revisado { background: rgba(148,163,184,0.15); color: #cbd5e1; }
+  .badge-estado-otro { background: rgba(148,163,184,0.15); color: #cbd5e1; }
   .badge-retro { background: rgba(124,58,237,0.2); color: #c4b5fd; }
   .badge-clasico { background: rgba(245,158,11,0.15); color: #fcd34d; }
   .badge-portatil { background: rgba(34,197,94,0.15); color: #86efac; }
@@ -80,6 +119,8 @@
   .add-cart-btn { background: var(--purple); color: white; border: none; padding: 7px 14px; border-radius: 7px; font-size: 12px; cursor: pointer; font-family: 'Inter', sans-serif; }
   .add-cart-btn:hover { background: #6d28d9; }
   .add-cart-btn:disabled { background: #3b2f5e; color: #6b5fa0; cursor: not-allowed; }
+
+  /* modal */
   .modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 200; align-items: center; justify-content: center; padding: 1rem; }
   .modal-overlay.open { display: flex; }
   .modal { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 2rem; max-width: 480px; width: 100%; max-height: 90vh; overflow-y: auto; position: relative; }
@@ -94,6 +135,8 @@
   .field-value { color: var(--text); font-weight: 500; }
   .modal-add-btn { width: 100%; background: var(--purple); color: white; border: none; padding: 12px; border-radius: 8px; font-size: 15px; cursor: pointer; font-family: 'Inter', sans-serif; font-weight: 500; }
   .modal-add-btn:disabled { background: #3b2f5e; color: #6b5fa0; cursor: not-allowed; }
+
+  /* cart */
   .cart-panel { display: none; position: fixed; top: 0; right: 0; bottom: 0; width: 320px; background: var(--card-bg); border-left: 1px solid var(--border); z-index: 300; flex-direction: column; padding: 1.5rem; }
   .cart-panel.open { display: flex; }
   .cart-items { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
@@ -108,7 +151,6 @@
   .qty-btn { background: rgba(124,58,237,0.3); border: none; color: var(--text); width: 22px; height: 22px; border-radius: 4px; cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; font-family: 'Inter', sans-serif; }
   .qty-btn:disabled { opacity: 0.3; cursor: not-allowed; }
   .qty-num { font-size: 13px; font-weight: 500; min-width: 16px; text-align: center; }
-  .remove-btn { background: none; border: none; color: #ef4444; cursor: pointer; font-size: 15px; }
   .cart-total { border-top: 1px solid var(--border); padding-top: 1rem; margin-top: 1rem; }
   .total-row { display: flex; justify-content: space-between; font-size: 16px; font-weight: 600; margin-bottom: 1rem; }
   .checkout-btn { width: 100%; background: var(--amber); color: #000; border: none; padding: 12px; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; font-family: 'Inter', sans-serif; }
@@ -147,65 +189,128 @@
   </div>
 </section>
 
-<!-- TABS -->
 <div class="section-tabs">
-  <button class="tab-btn active" id="tab-consolas" onclick="switchTab('consolas')">
-    <span class="tab-icon">🎮</span> Consolas
-  </button>
-  <button class="tab-btn" id="tab-accesorios" onclick="switchTab('accesorios')">
-    <span class="tab-icon">🕹️</span> Accesorios
-  </button>
-  <button class="tab-btn" id="tab-juegos" onclick="switchTab('juegos')">
-    <span class="tab-icon">📀</span> Juegos
-  </button>
+  <button class="tab-btn active" id="tab-consolas" onclick="switchTab('consolas')">🎮 Consolas</button>
+  <button class="tab-btn" id="tab-accesorios" onclick="switchTab('accesorios')">🕹️ Accesorios</button>
+  <button class="tab-btn" id="tab-juegos" onclick="switchTab('juegos')">📀 Juegos</button>
 </div>
 
-<!-- CONSOLAS -->
+<!-- ═══ CONSOLAS ═══ -->
 <div class="catalog-section active" id="section-consolas">
-  <div class="filters">
-    <button class="filter-btn active" onclick="filterProducts('consolas','todos', this)">Todos</button>
-    <button class="filter-btn" onclick="filterProducts('consolas','retro', this)">Retro</button>
-    <button class="filter-btn" onclick="filterProducts('consolas','clasico', this)">Clásico</button>
-    <button class="filter-btn" onclick="filterProducts('consolas','portatil', this)">Portátil</button>
-    <button class="filter-btn" onclick="filterProducts('consolas','arcade', this)">Arcade</button>
-    <button class="filter-btn" onclick="filterProducts('consolas','coleccionable', this)">Coleccionable</button>
+  <div class="filter-panel" id="fp-consolas">
+    <div class="filter-toggle-bar" onclick="toggleFilterPanel('consolas')">
+      <div class="filter-toggle-left">
+        <span>⚙️ Filtros</span>
+        <div class="active-tags" id="tags-consolas"></div>
+      </div>
+      <div class="filter-toggle-right">
+        <span class="result-count" id="rc-consolas"></span>
+        <button class="clear-all-btn" id="clear-consolas" onclick="event.stopPropagation();clearFilters('consolas')">Limpiar todo</button>
+        <span class="filter-toggle-icon" id="ficon-consolas">▾</span>
+      </div>
+    </div>
+    <div class="filter-panel-inner" id="finner-consolas" style="display:none">
+      <div class="filter-group">
+        <div class="filter-group-label">Categoría</div>
+        <div class="filter-chips" id="chips-consolas-cat"></div>
+      </div>
+      <div class="filter-divider"></div>
+      <div class="filter-group">
+        <div class="filter-group-label">Fabricante</div>
+        <div class="filter-chips" id="chips-consolas-marca"></div>
+      </div>
+      <div class="filter-divider"></div>
+      <div class="filter-group">
+        <div class="filter-group-label">Estado</div>
+        <div class="filter-chips" id="chips-consolas-estado"></div>
+      </div>
+    </div>
   </div>
   <section class="products-section">
-    <p class="section-title">Catálogo de consolas</p>
+    <div class="section-header">
+      <p class="section-title">Catálogo de consolas</p>
+      <span class="section-count" id="sc-consolas"></span>
+    </div>
     <div class="products-grid" id="gridConsolas"></div>
   </section>
 </div>
 
-<!-- ACCESORIOS -->
+<!-- ═══ ACCESORIOS ═══ -->
 <div class="catalog-section" id="section-accesorios">
-  <div class="filters">
-    <button class="filter-btn active" onclick="filterProducts('accesorios','todos', this)">Todos</button>
-    <button class="filter-btn" onclick="filterProducts('accesorios','control', this)">Controles</button>
-    <button class="filter-btn" onclick="filterProducts('accesorios','audio', this)">Audio</button>
-    <button class="filter-btn" onclick="filterProducts('accesorios','video', this)">Video</button>
-    <button class="filter-btn" onclick="filterProducts('accesorios','almacenamiento', this)">Almacenamiento</button>
-    <button class="filter-btn" onclick="filterProducts('accesorios','cable', this)">Cables</button>
-    <button class="filter-btn" onclick="filterProducts('accesorios','otro', this)">Otros</button>
+  <div class="filter-panel" id="fp-accesorios">
+    <div class="filter-toggle-bar" onclick="toggleFilterPanel('accesorios')">
+      <div class="filter-toggle-left">
+        <span>⚙️ Filtros</span>
+        <div class="active-tags" id="tags-accesorios"></div>
+      </div>
+      <div class="filter-toggle-right">
+        <span class="result-count" id="rc-accesorios"></span>
+        <button class="clear-all-btn" id="clear-accesorios" onclick="event.stopPropagation();clearFilters('accesorios')">Limpiar todo</button>
+        <span class="filter-toggle-icon" id="ficon-accesorios">▾</span>
+      </div>
+    </div>
+    <div class="filter-panel-inner" id="finner-accesorios" style="display:none">
+      <div class="filter-group">
+        <div class="filter-group-label">Tipo</div>
+        <div class="filter-chips" id="chips-accesorios-cat"></div>
+      </div>
+      <div class="filter-divider"></div>
+      <div class="filter-group">
+        <div class="filter-group-label">Marca</div>
+        <div class="filter-chips" id="chips-accesorios-marca"></div>
+      </div>
+      <div class="filter-divider"></div>
+      <div class="filter-group">
+        <div class="filter-group-label">Estado</div>
+        <div class="filter-chips" id="chips-accesorios-estado"></div>
+      </div>
+    </div>
   </div>
   <section class="products-section">
-    <p class="section-title">Accesorios y periféricos</p>
+    <div class="section-header">
+      <p class="section-title">Accesorios y periféricos</p>
+      <span class="section-count" id="sc-accesorios"></span>
+    </div>
     <div class="products-grid" id="gridAccesorios"></div>
   </section>
 </div>
 
-<!-- JUEGOS -->
+<!-- ═══ JUEGOS ═══ -->
 <div class="catalog-section" id="section-juegos">
-  <div class="filters">
-    <button class="filter-btn active" onclick="filterProducts('juegos','todos', this)">Todos</button>
-    <button class="filter-btn" onclick="filterProducts('juegos','accion', this)">Acción</button>
-    <button class="filter-btn" onclick="filterProducts('juegos','rpg', this)">RPG</button>
-    <button class="filter-btn" onclick="filterProducts('juegos','plataformas', this)">Plataformas</button>
-    <button class="filter-btn" onclick="filterProducts('juegos','lucha', this)">Lucha</button>
-    <button class="filter-btn" onclick="filterProducts('juegos','carreras', this)">Carreras</button>
-    <button class="filter-btn" onclick="filterProducts('juegos','deportes', this)">Deportes</button>
+  <div class="filter-panel" id="fp-juegos">
+    <div class="filter-toggle-bar" onclick="toggleFilterPanel('juegos')">
+      <div class="filter-toggle-left">
+        <span>⚙️ Filtros</span>
+        <div class="active-tags" id="tags-juegos"></div>
+      </div>
+      <div class="filter-toggle-right">
+        <span class="result-count" id="rc-juegos"></span>
+        <button class="clear-all-btn" id="clear-juegos" onclick="event.stopPropagation();clearFilters('juegos')">Limpiar todo</button>
+        <span class="filter-toggle-icon" id="ficon-juegos">▾</span>
+      </div>
+    </div>
+    <div class="filter-panel-inner" id="finner-juegos" style="display:none">
+      <div class="filter-group">
+        <div class="filter-group-label">Género</div>
+        <div class="filter-chips" id="chips-juegos-cat"></div>
+      </div>
+      <div class="filter-divider"></div>
+      <div class="filter-group">
+        <div class="filter-group-label">Plataforma</div>
+        <div class="filter-chips" id="chips-juegos-marca"></div>
+      </div>
+      <div class="filter-divider"></div>
+      <div class="filter-group">
+        <div class="filter-group-label">Estado</div>
+        <div class="filter-chips" id="chips-juegos-estado"></div>
+      </div>
+    </div>
   </div>
   <section class="products-section">
-    <p class="section-title">Juegos originales</p>
+    <div class="section-header">
+      <p class="section-title">Juegos originales</p>
+      <span class="section-count" id="sc-juegos"></span>
+    </div>
     <div class="products-grid" id="gridJuegos"></div>
   </section>
 </div>
@@ -244,12 +349,14 @@
 <div class="toast" id="toast"></div>
 
 <script>
-// ─── CONSOLAS ───────────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════════
+// DATA
+// ═══════════════════════════════════════════════════════════════
 const consolas = [
   { id:"CON-001", nombre:"Nintendo Entertainment System", anio:1983, categoria:"clasico", emoji:"🎮", fabricante:"Nintendo", procesador:"Ricoh 2A03 (1.79 MHz)", ram:"2 KB", resolucion:"256×240 px", estado:"Excelente", incluye:"1 control, cables AV, 2 juegos", precio:18500, stock:4, descripcion:"La NES que lo inició todo. Super Mario Bros, Zelda y Contra en una sola caja gris." },
   { id:"CON-002", nombre:"Sega Mega Drive", anio:1988, categoria:"retro", emoji:"🕹️", fabricante:"Sega", procesador:"Motorola 68000 (7.67 MHz)", ram:"64 KB", resolucion:"320×224 px", estado:"Muy bueno", incluye:"2 controles de 6 botones, cable de video", precio:22000, stock:2, descripcion:"El rival eterno de Nintendo. Sonic, Streets of Rage y Mortal Kombat en su mejor versión." },
   { id:"CON-003", nombre:"Game Boy Color", anio:1998, categoria:"portatil", emoji:"👾", fabricante:"Nintendo", procesador:"Z80 mejorado (8 MHz)", ram:"32 KB", resolucion:"160×144 px", estado:"Bueno", incluye:"Con tapa protectora original", precio:9800, stock:7, descripcion:"Pokémon Oro y Plata, Tetris DX y Link's Awakening DX en la palma de tu mano." },
-  { id:"CON-004", nombre:"Atari 2600", anio:1977, categoria:"retro", emoji:"📺", fabricante:"Atari Inc.", procesador:"MOS 6507 (1.19 MHz)", ram:"128 bytes", resolucion:"160×192 px", estado:"Bueno", incluye:"1 joystick, 3 cartuchos clásicos", precio:14500, stock:3, descripcion:"La pionera del gaming doméstico. Pitfall, Space Invaders y Pac-Man en la sala de tu casa." },
+  { id:"CON-004", nombre:"Atari 2600", anio:1977, categoria:"retro", emoji:"📺", fabricante:"Atari", procesador:"MOS 6507 (1.19 MHz)", ram:"128 bytes", resolucion:"160×192 px", estado:"Bueno", incluye:"1 joystick, 3 cartuchos clásicos", precio:14500, stock:3, descripcion:"La pionera del gaming doméstico. Pitfall, Space Invaders y Pac-Man en la sala de tu casa." },
   { id:"CON-005", nombre:"Arcade Cocktail Cabinet", anio:1982, categoria:"arcade", emoji:"🕹️", fabricante:"Múltiples", procesador:"Varios chips Z80", ram:"Múltiple", resolucion:"256×224 px", estado:"Restaurado", incluye:"1000 juegos preinstalados, 2 joysticks", precio:85000, stock:1, descripcion:"Mesa arcade de época completamente restaurada. Galaga, Donkey Kong y Pac-Man como en el salón." },
   { id:"CON-006", nombre:"Super Nintendo (SNES)", anio:1990, categoria:"clasico", emoji:"🎯", fabricante:"Nintendo", procesador:"Ricoh 5A22 (3.58 MHz)", ram:"128 KB", resolucion:"256×224 px", estado:"Excelente", incluye:"2 controles, Super Mario World, fuente", precio:25000, stock:5, descripcion:"El pico dorado del 16 bits. Donkey Kong Country, Street Fighter II y Zelda: A Link to the Past." },
   { id:"CON-007", nombre:"PlayStation 1", anio:1994, categoria:"clasico", emoji:"💿", fabricante:"Sony", procesador:"MIPS R3000A (33 MHz)", ram:"2 MB", resolucion:"320×240 px", estado:"Muy bueno", incluye:"2 controles DualShock, memory card", precio:19900, stock:6, descripcion:"La primera PlayStation que cambió el gaming para siempre. Final Fantasy VII, Crash y Metal Gear Solid." },
@@ -268,7 +375,6 @@ const consolas = [
   { id:"CON-020", nombre:"Neo Geo Pocket Color", anio:1999, categoria:"portatil", emoji:"🎴", fabricante:"SNK", procesador:"Toshiba TLCS900H (6.144 MHz)", ram:"64 KB", resolucion:"160×152 px", estado:"Muy bueno", incluye:"Funda rígida, cable link, 2 juegos SNK", precio:38000, stock:2, descripcion:"La portátil rival de la GBA con el mejor joystick táctil de la historia. King of Fighters R2 y Sonic Pocket Adventure." },
 ];
 
-// ─── ACCESORIOS ─────────────────────────────────────────────────
 const accesorios = [
   { id:"ACC-001", nombre:"Control NES Dogbone", anio:1989, categoria:"control", emoji:"🎮", marca:"Nintendo", tipo:"Control secundario", compatibilidad:"NES, Famicom", estado:"Muy bueno", incluye:"Cable original intacto", precio:4500, stock:6, descripcion:"El control rectangular de segunda generación de Nintendo. Más ergonómico que el original, muy buscado por coleccionistas." },
   { id:"ACC-002", nombre:"Control SNES Original", anio:1990, categoria:"control", emoji:"🕹️", marca:"Nintendo", tipo:"Control principal", compatibilidad:"Super Nintendo", estado:"Excelente", incluye:"Cable en perfectas condiciones", precio:5800, stock:4, descripcion:"El pad que popularizó los cuatro botones de acción. Considerado uno de los mejores controles de la historia." },
@@ -277,77 +383,210 @@ const accesorios = [
   { id:"ACC-005", nombre:"Control Mega Drive 6 botones", anio:1993, categoria:"control", emoji:"⚫", marca:"Sega", tipo:"Control 6 botones", compatibilidad:"Mega Drive / Genesis", estado:"Excelente", incluye:"Cable original", precio:4800, stock:4, descripcion:"Indispensable para Street Fighter II y Mortal Kombat. Los seis botones de frente que los fanáticos del fighting pedían." },
   { id:"ACC-006", nombre:"Auriculares Stereo Retro", anio:1992, categoria:"audio", emoji:"🎧", marca:"Panasonic", tipo:"Auriculares over-ear", compatibilidad:"Universal (3.5mm)", estado:"Bueno", incluye:"Cable en espiral, cojines originales", precio:3200, stock:3, descripcion:"Auriculares de época ideales para Game Boy y portátiles retro. Sonido cálido y jack de 3.5mm universal." },
   { id:"ACC-007", nombre:"Parlante TV Estéreo Retro", anio:1988, categoria:"audio", emoji:"📻", marca:"Sony", tipo:"Altavoces externos", compatibilidad:"Consolas AV", estado:"Restaurado", incluye:"Cable RCA, fuente de 9V", precio:5900, stock:2, descripcion:"Parlantes externos de la era dorada. Conexión RCA directa desde la consola, graves cálidos y muy buen volumen." },
-  { id:"ACC-008", nombre:"Luz de pantalla GBA", anio:2003, categoria:"video", emoji:"💡", marca:"Aftermarket", tipo:"Accesorio de iluminación", compatibilidad:"Game Boy Advance", estado:"Nuevo en caja", incluye:"Batería incluida", precio:1800, stock:8, descripcion:"Luz externa para jugar con la GBA original a oscuras. Clip articulado y brazo ajustable. Indispensable para noches de Pokémon." },
+  { id:"ACC-008", nombre:"Luz de pantalla GBA", anio:2003, categoria:"video", emoji:"💡", marca:"Aftermarket", tipo:"Accesorio de iluminación", compatibilidad:"Game Boy Advance", estado:"Nuevo", incluye:"Batería incluida", precio:1800, stock:8, descripcion:"Luz externa para jugar con la GBA original a oscuras. Clip articulado y brazo ajustable. Indispensable para noches de Pokémon." },
   { id:"ACC-009", nombre:"Cable RGB SCART – PS1/PS2", anio:1995, categoria:"cable", emoji:"🔌", marca:"Pansonic", tipo:"Cable de video", compatibilidad:"PlayStation 1 y 2", estado:"Nuevo", incluye:"Conectores dorados", precio:2100, stock:10, descripcion:"Cable RGB SCART para máxima calidad de imagen en PS1 y PS2. Colores más nítidos que el cable AV compuesto." },
   { id:"ACC-010", nombre:"Cable AV Multi-Sega", anio:1990, categoria:"cable", emoji:"🔌", marca:"Sega", tipo:"Cable compuesto AV", compatibilidad:"Mega Drive, Saturn, Dreamcast", estado:"Nuevo", incluye:"Pack de 2 unidades", precio:1500, stock:12, descripcion:"Cable AV oficial compatible con las tres grandes de Sega. Un cable, tres consolas. Conector DIN de 9 pines." },
   { id:"ACC-011", nombre:"Memory Card PS1 – 1 MB", anio:1994, categoria:"almacenamiento", emoji:"💾", marca:"Sony", tipo:"Tarjeta de memoria", compatibilidad:"PlayStation 1", estado:"Muy bueno", incluye:"Protector de ranura original", precio:2800, stock:7, descripcion:"La memory card gris original de PS1 con 15 bloques libres. Verifica el estado antes de guardar tus partidas." },
   { id:"ACC-012", nombre:"Memory Card PS2 – 8 MB", anio:2000, categoria:"almacenamiento", emoji:"💾", marca:"Sony", tipo:"Tarjeta de memoria", compatibilidad:"PlayStation 2", estado:"Excelente", incluye:"Caja original", precio:3500, stock:5, descripcion:"Memory card oficial de 8 MB para PS2. Compatible con todos los juegos de la generación. Sin sectores dañados." },
   { id:"ACC-013", nombre:"VMU Dreamcast – Azul", anio:1998, categoria:"almacenamiento", emoji:"📱", marca:"Sega", tipo:"Unidad de memoria visual", compatibilidad:"Dreamcast", estado:"Muy bueno", incluye:"Baterías CR2032 nuevas", precio:6800, stock:3, descripcion:"La VMU que se insertaba en el control y tenía su propia pantalla. Almacenamiento y minijuegos en un solo gadget." },
-  { id:"ACC-014", nombre:"Power Pack GBA Recargable", anio:2002, categoria:"otro", emoji:"🔋", marca:"MadCatz", tipo:"Batería externa", compatibilidad:"Game Boy Advance", estado:"Revisado y funcional", incluye:"Cable cargador MicroUSB", precio:2400, stock:4, descripcion:"Batería recargable que extiende la vida de la GBA hasta 20 horas. Se monta en la parte trasera sin herramientas." },
+  { id:"ACC-014", nombre:"Power Pack GBA Recargable", anio:2002, categoria:"otro", emoji:"🔋", marca:"MadCatz", tipo:"Batería externa", compatibilidad:"Game Boy Advance", estado:"Revisado", incluye:"Cable cargador MicroUSB", precio:2400, stock:4, descripcion:"Batería recargable que extiende la vida de la GBA hasta 20 horas. Se monta en la parte trasera sin herramientas." },
   { id:"ACC-015", nombre:"Multitap PS2 – 4 Jugadores", anio:2001, categoria:"otro", emoji:"🔀", marca:"Sony", tipo:"Adaptador multijugador", compatibilidad:"PlayStation 2", estado:"Bueno", incluye:"Cable de extensión", precio:4100, stock:2, descripcion:"Adaptador oficial para cuatro controles en PS2. Imprescindible para partidas de Tekken Tag, Bomberman o FIFA." },
 ];
 
-// ─── JUEGOS ──────────────────────────────────────────────────────
 const juegos = [
-  { id:"JUG-001", nombre:"Super Mario Bros.", anio:1985, categoria:"plataformas", emoji:"🍄", plataforma:"NES", desarrolladora:"Nintendo", genero:"Plataformas", jugadores:"1-2 simultáneos", idioma:"Sin texto / Universal", estado:"Cartucho bueno", precio:8500, stock:3, descripcion:"El juego que salvó a la industria. Mario salta, derrota Goombas y reina en la imaginación de generaciones." },
-  { id:"JUG-002", nombre:"The Legend of Zelda", anio:1986, categoria:"accion", emoji:"🗡️", plataforma:"NES", desarrolladora:"Nintendo", genero:"Acción-Aventura", jugadores:"1", idioma:"Inglés", estado:"Cartucho con caja", precio:12000, stock:2, descripcion:"El mundo abierto que cambió los videojuegos. Explora Hyrule, resuelve dungeons y derrota a Ganon." },
-  { id:"JUG-003", nombre:"Sonic the Hedgehog 2", anio:1992, categoria:"plataformas", emoji:"💨", plataforma:"Mega Drive", desarrolladora:"Sega", genero:"Plataformas", jugadores:"1-2", idioma:"Sin texto", estado:"Cartucho excelente", precio:7200, stock:4, descripcion:"El debut de Tails y el modo multijugador en Sonic. Velocidad pura con Chemical Plant Zone a todo volumen." },
-  { id:"JUG-004", nombre:"Street Fighter II Turbo", anio:1993, categoria:"lucha", emoji:"👊", plataforma:"SNES", desarrolladora:"Capcom", genero:"Lucha", jugadores:"1-2 simultáneos", idioma:"Sin texto", estado:"Cartucho muy bueno", precio:9800, stock:3, descripcion:"La versión definitiva del arcade en casa. Hadouken, Shoryuken y el carisma de los 16 personajes que marcaron un género." },
-  { id:"JUG-005", nombre:"Final Fantasy VII", anio:1997, categoria:"rpg", emoji:"⚔️", plataforma:"PlayStation 1", desarrolladora:"Square", genero:"RPG por turnos", jugadores:"1", idioma:"Inglés", estado:"3 discos en caja original", precio:18000, stock:2, descripcion:"Cloud, Aerith y Sephiroth en la historia más épica del RPG. Los 3 CDs que cambiaron la narrativa de los videojuegos." },
-  { id:"JUG-006", nombre:"Super Mario Kart", anio:1992, categoria:"carreras", emoji:"🏎️", plataforma:"SNES", desarrolladora:"Nintendo", genero:"Carreras", jugadores:"1-2 simultáneos", idioma:"Sin texto", estado:"Cartucho bueno", precio:9200, stock:3, descripcion:"El origen de la franquicia más vendida de Nintendo. Rainbow Road, conchas azules y el caos multijugador de siempre." },
-  { id:"JUG-007", nombre:"GoldenEye 007", anio:1997, categoria:"accion", emoji:"🔫", plataforma:"Nintendo 64", desarrolladora:"Rare", genero:"FPS", jugadores:"1-4 multijugador", idioma:"Inglés", estado:"Cartucho excelente", precio:13500, stock:2, descripcion:"El shooter que definió el multijugador de consola. Cuatro jugadores, pantalla dividida y las míticas misiones de Bond." },
-  { id:"JUG-008", nombre:"Pokémon Rojo / Azul", anio:1996, categoria:"rpg", emoji:"🔴", plataforma:"Game Boy", desarrolladora:"Game Freak", genero:"RPG", jugadores:"1 (link cable para PvP)", idioma:"Español (versión ES)", estado:"Cartucho con tapa", precio:11000, stock:3, descripcion:"Los 151 Pokémon originales. Hazte con todos, reta a los gimnasios y derrota a la Liga Pokémon." },
-  { id:"JUG-009", nombre:"Crash Bandicoot 2", anio:1997, categoria:"plataformas", emoji:"🐾", plataforma:"PlayStation 1", desarrolladora:"Naughty Dog", genero:"Plataformas 3D", jugadores:"1", idioma:"Español", estado:"CD muy bueno, caja incluida", precio:8800, stock:4, descripcion:"El marsupial más querido de los 90s en su mejor entrega. Wumpa fruits, máscaras Aku Aku y jefes memorables." },
-  { id:"JUG-010", nombre:"Super Smash Bros. Melee", anio:2001, categoria:"lucha", emoji:"💥", plataforma:"GameCube", desarrolladora:"HAL Laboratory", genero:"Lucha / Plataformas", jugadores:"1-4 simultáneos", idioma:"Inglés", estado:"Disco excelente con caja", precio:16500, stock:2, descripcion:"El juego de lucha más jugado de la historia en torneos. Fox, Marth, Sheik y la tribu de fanáticos que sigue activa hoy." },
-  { id:"JUG-011", nombre:"Metal Slug 3", anio:2000, categoria:"accion", emoji:"🪖", plataforma:"Neo Geo AES", desarrolladora:"SNK", genero:"Run and gun", jugadores:"1-2 simultáneos", idioma:"Inglés", estado:"Cartucho original SNK", precio:45000, stock:1, descripcion:"La cima de los run and gun. Sprites inmaculados, humor negro y una dificultad brutal que sigue sin tener par." },
-  { id:"JUG-012", nombre:"ISS Pro Evolution", anio:1998, categoria:"deportes", emoji:"⚽", plataforma:"PlayStation 1", desarrolladora:"Konami", genero:"Fútbol", jugadores:"1-2", idioma:"Español", estado:"Disco muy bueno", precio:4500, stock:5, descripcion:"El fútbol que le disputó el trono a FIFA. Jugabilidad táctica, los mejores controles de la era PS1 y modos infinitos." },
-  { id:"JUG-013", nombre:"Mario Kart 64", anio:1996, categoria:"carreras", emoji:"🏁", plataforma:"Nintendo 64", desarrolladora:"Nintendo", genero:"Carreras", jugadores:"1-4 simultáneos", idioma:"Sin texto", estado:"Cartucho excelente", precio:10500, stock:3, descripcion:"Cuatro jugadores en pantalla dividida y pistas en 3D por primera vez. Toad's Turnpike y Royal Raceway siguen siendo favoritas." },
-  { id:"JUG-014", nombre:"Donkey Kong Country", anio:1994, categoria:"plataformas", emoji:"🦍", plataforma:"SNES", desarrolladora:"Rare", genero:"Plataformas", jugadores:"1-2 alternados", idioma:"Sin texto", estado:"Cartucho muy bueno", precio:8200, stock:4, descripcion:"Los gráficos prerenderizados que sacudieron el mundo en 1994. DK y Diddy en niveles que van de la selva al fondo del mar." },
-  { id:"JUG-015", nombre:"Shadow of the Colossus", anio:2005, categoria:"accion", emoji:"🗿", plataforma:"PlayStation 2", desarrolladora:"Team Ico", genero:"Acción-Aventura", jugadores:"1", idioma:"Español", estado:"Disco excelente, caja incluida", precio:14000, stock:2, descripcion:"Dieciséis colosos, un caballo y una pregunta que no tiene respuesta fácil. La obra maestra de Team Ico." },
+  { id:"JUG-001", nombre:"Super Mario Bros.", anio:1985, categoria:"plataformas", emoji:"🍄", plataforma:"NES", desarrolladora:"Nintendo", genero:"Plataformas", jugadores:"1-2 simultáneos", idioma:"Universal", estado:"Bueno", precio:8500, stock:3, descripcion:"El juego que salvó a la industria. Mario salta, derrota Goombas y reina en la imaginación de generaciones." },
+  { id:"JUG-002", nombre:"The Legend of Zelda", anio:1986, categoria:"accion", emoji:"🗡️", plataforma:"NES", desarrolladora:"Nintendo", genero:"Acción-Aventura", jugadores:"1", idioma:"Inglés", estado:"Muy bueno", precio:12000, stock:2, descripcion:"El mundo abierto que cambió los videojuegos. Explora Hyrule, resuelve dungeons y derrota a Ganon." },
+  { id:"JUG-003", nombre:"Sonic the Hedgehog 2", anio:1992, categoria:"plataformas", emoji:"💨", plataforma:"Mega Drive", desarrolladora:"Sega", genero:"Plataformas", jugadores:"1-2", idioma:"Universal", estado:"Excelente", precio:7200, stock:4, descripcion:"El debut de Tails y el modo multijugador en Sonic. Velocidad pura con Chemical Plant Zone a todo volumen." },
+  { id:"JUG-004", nombre:"Street Fighter II Turbo", anio:1993, categoria:"lucha", emoji:"👊", plataforma:"SNES", desarrolladora:"Capcom", genero:"Lucha", jugadores:"1-2 simultáneos", idioma:"Universal", estado:"Muy bueno", precio:9800, stock:3, descripcion:"La versión definitiva del arcade en casa. Hadouken, Shoryuken y el carisma de los 16 personajes que marcaron un género." },
+  { id:"JUG-005", nombre:"Final Fantasy VII", anio:1997, categoria:"rpg", emoji:"⚔️", plataforma:"PlayStation 1", desarrolladora:"Square", genero:"RPG por turnos", jugadores:"1", idioma:"Inglés", estado:"Muy bueno", precio:18000, stock:2, descripcion:"Cloud, Aerith y Sephiroth en la historia más épica del RPG. Los 3 CDs que cambiaron la narrativa de los videojuegos." },
+  { id:"JUG-006", nombre:"Super Mario Kart", anio:1992, categoria:"carreras", emoji:"🏎️", plataforma:"SNES", desarrolladora:"Nintendo", genero:"Carreras", jugadores:"1-2 simultáneos", idioma:"Universal", estado:"Bueno", precio:9200, stock:3, descripcion:"El origen de la franquicia más vendida de Nintendo. Rainbow Road, conchas azules y el caos multijugador de siempre." },
+  { id:"JUG-007", nombre:"GoldenEye 007", anio:1997, categoria:"accion", emoji:"🔫", plataforma:"Nintendo 64", desarrolladora:"Rare", genero:"FPS", jugadores:"1-4 multijugador", idioma:"Inglés", estado:"Excelente", precio:13500, stock:2, descripcion:"El shooter que definió el multijugador de consola. Cuatro jugadores, pantalla dividida y las míticas misiones de Bond." },
+  { id:"JUG-008", nombre:"Pokémon Rojo / Azul", anio:1996, categoria:"rpg", emoji:"🔴", plataforma:"Game Boy", desarrolladora:"Game Freak", genero:"RPG", jugadores:"1 (link cable)", idioma:"Español", estado:"Bueno", precio:11000, stock:3, descripcion:"Los 151 Pokémon originales. Hazte con todos, reta a los gimnasios y derrota a la Liga Pokémon." },
+  { id:"JUG-009", nombre:"Crash Bandicoot 2", anio:1997, categoria:"plataformas", emoji:"🐾", plataforma:"PlayStation 1", desarrolladora:"Naughty Dog", genero:"Plataformas 3D", jugadores:"1", idioma:"Español", estado:"Muy bueno", precio:8800, stock:4, descripcion:"El marsupial más querido de los 90s en su mejor entrega. Wumpa fruits, máscaras Aku Aku y jefes memorables." },
+  { id:"JUG-010", nombre:"Super Smash Bros. Melee", anio:2001, categoria:"lucha", emoji:"💥", plataforma:"GameCube", desarrolladora:"HAL Laboratory", genero:"Lucha", jugadores:"1-4 simultáneos", idioma:"Inglés", estado:"Excelente", precio:16500, stock:2, descripcion:"El juego de lucha más jugado en torneos. Fox, Marth, Sheik y la tribu de fanáticos que sigue activa hoy." },
+  { id:"JUG-011", nombre:"Metal Slug 3", anio:2000, categoria:"accion", emoji:"🪖", plataforma:"Neo Geo AES", desarrolladora:"SNK", genero:"Run and gun", jugadores:"1-2 simultáneos", idioma:"Inglés", estado:"Muy bueno", precio:45000, stock:1, descripcion:"La cima de los run and gun. Sprites inmaculados, humor negro y una dificultad brutal que sigue sin tener par." },
+  { id:"JUG-012", nombre:"ISS Pro Evolution", anio:1998, categoria:"deportes", emoji:"⚽", plataforma:"PlayStation 1", desarrolladora:"Konami", genero:"Fútbol", jugadores:"1-2", idioma:"Español", estado:"Bueno", precio:4500, stock:5, descripcion:"El fútbol que le disputó el trono a FIFA. Jugabilidad táctica, los mejores controles de la era PS1 y modos infinitos." },
+  { id:"JUG-013", nombre:"Mario Kart 64", anio:1996, categoria:"carreras", emoji:"🏁", plataforma:"Nintendo 64", desarrolladora:"Nintendo", genero:"Carreras", jugadores:"1-4 simultáneos", idioma:"Universal", estado:"Excelente", precio:10500, stock:3, descripcion:"Cuatro jugadores en pantalla dividida y pistas en 3D por primera vez. Toad's Turnpike y Royal Raceway siguen siendo favoritas." },
+  { id:"JUG-014", nombre:"Donkey Kong Country", anio:1994, categoria:"plataformas", emoji:"🦍", plataforma:"SNES", desarrolladora:"Rare", genero:"Plataformas", jugadores:"1-2 alternados", idioma:"Universal", estado:"Muy bueno", precio:8200, stock:4, descripcion:"Los gráficos prerenderizados que sacudieron el mundo en 1994. DK y Diddy en niveles que van de la selva al fondo del mar." },
+  { id:"JUG-015", nombre:"Shadow of the Colossus", anio:2005, categoria:"accion", emoji:"🗿", plataforma:"PlayStation 2", desarrolladora:"Team Ico", genero:"Acción-Aventura", jugadores:"1", idioma:"Español", estado:"Excelente", precio:14000, stock:2, descripcion:"Dieciséis colosos, un caballo y una pregunta que no tiene respuesta fácil. La obra maestra de Team Ico." },
 ];
 
 let cart = {};
 const allItems = [...consolas, ...accesorios, ...juegos];
 
-function stockDisponible(id) {
-  const p = allItems.find(x => x.id === id);
-  return p.stock - (cart[id] || 0);
-}
-function totalEnCarrito() {
-  return Object.values(cart).reduce((s, q) => s + q, 0);
+// ═══════════════════════════════════════════════════════════════
+// FILTER STATE
+// ═══════════════════════════════════════════════════════════════
+// Each section has: cat (Set), marca (Set), estado (Set)
+const filterState = {
+  consolas:   { cat: new Set(), marca: new Set(), estado: new Set() },
+  accesorios: { cat: new Set(), marca: new Set(), estado: new Set() },
+  juegos:     { cat: new Set(), marca: new Set(), estado: new Set() },
+};
+
+// Map section → which field is "marca" (label varies)
+const marcaField = { consolas: 'fabricante', accesorios: 'marca', juegos: 'plataforma' };
+
+function getMarca(p, sec) { return p[marcaField[sec]]; }
+
+function normalizeEstado(e) {
+  if (!e) return 'otro';
+  const s = e.toLowerCase();
+  if (s.startsWith('excelente')) return 'excelente';
+  if (s.startsWith('muy bueno') || s.startsWith('muy b')) return 'muybueno';
+  if (s.startsWith('bueno')) return 'bueno';
+  if (s.startsWith('restaurado')) return 'restaurado';
+  if (s.startsWith('nuevo')) return 'nuevo';
+  if (s.startsWith('revisado')) return 'revisado';
+  return 'otro';
 }
 
-// ─── TABS ────────────────────────────────────────────────────────
-function switchTab(tab) {
-  document.querySelectorAll('.catalog-section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('section-' + tab).classList.add('active');
-  document.getElementById('tab-' + tab).classList.add('active');
+const estadoLabel = { excelente:'Excelente', muybueno:'Muy bueno', bueno:'Bueno', restaurado:'Restaurado', nuevo:'Nuevo', revisado:'Revisado', otro:'Otro' };
+
+// ═══════════════════════════════════════════════════════════════
+// FILTER PANEL INIT
+// ═══════════════════════════════════════════════════════════════
+const secciones = ['consolas','accesorios','juegos'];
+const dataMap = { consolas, accesorios, juegos };
+
+const catLabels = {
+  consolas:   { retro:'Retro', clasico:'Clásico', portatil:'Portátil', arcade:'Arcade', coleccionable:'Coleccionable' },
+  accesorios: { control:'Controles', audio:'Audio', video:'Video', almacenamiento:'Almacenamiento', cable:'Cables', otro:'Otros' },
+  juegos:     { accion:'Acción', rpg:'RPG', plataformas:'Plataformas', lucha:'Lucha', carreras:'Carreras', deportes:'Deportes' },
+};
+
+function buildFilterPanels() {
+  secciones.forEach(sec => {
+    const data = dataMap[sec];
+
+    // Categories
+    const cats = [...new Set(data.map(p => p.categoria))].sort();
+    document.getElementById(`chips-${sec}-cat`).innerHTML = cats.map(c =>
+      `<button class="chip" data-sec="${sec}" data-dim="cat" data-val="${c}" onclick="toggleChip(this)">${catLabels[sec][c] || c}</button>`
+    ).join('');
+
+    // Marca / Fabricante / Plataforma
+    const marcas = [...new Set(data.map(p => getMarca(p, sec)))].filter(Boolean).sort();
+    document.getElementById(`chips-${sec}-marca`).innerHTML = marcas.map(m =>
+      `<button class="chip" data-sec="${sec}" data-dim="marca" data-val="${m}" onclick="toggleChip(this)">${m}</button>`
+    ).join('');
+
+    // Estado
+    const estados = [...new Set(data.map(p => normalizeEstado(p.estado)))];
+    const estadoOrder = ['excelente','muybueno','bueno','restaurado','nuevo','revisado','otro'];
+    estados.sort((a,b) => estadoOrder.indexOf(a) - estadoOrder.indexOf(b));
+    document.getElementById(`chips-${sec}-estado`).innerHTML = estados.map(e =>
+      `<button class="chip" data-sec="${sec}" data-dim="estado" data-val="${e}" onclick="toggleChip(this)">${estadoLabel[e]}</button>`
+    ).join('');
+  });
 }
 
-// ─── RENDER ──────────────────────────────────────────────────────
-function filterProducts(seccion, filtro, btn) {
-  const parent = btn.closest('.catalog-section');
-  parent.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  renderSection(seccion, filtro);
+// ═══════════════════════════════════════════════════════════════
+// TOGGLE PANEL OPEN/CLOSE
+// ═══════════════════════════════════════════════════════════════
+function toggleFilterPanel(sec) {
+  const inner = document.getElementById(`finner-${sec}`);
+  const icon = document.getElementById(`ficon-${sec}`);
+  const isOpen = inner.style.display !== 'none';
+  inner.style.display = isOpen ? 'none' : 'flex';
+  icon.classList.toggle('open', !isOpen);
 }
 
-function renderSection(seccion, filtro) {
-  const map = { consolas: { data: consolas, gridId: 'gridConsolas' }, accesorios: { data: accesorios, gridId: 'gridAccesorios' }, juegos: { data: juegos, gridId: 'gridJuegos' } };
-  const { data, gridId } = map[seccion];
-  const filtered = filtro === 'todos' ? data : data.filter(p => p.categoria === filtro);
-  const grid = document.getElementById(gridId);
-  grid.innerHTML = filtered.map(p => {
+// ═══════════════════════════════════════════════════════════════
+// CHIP TOGGLE
+// ═══════════════════════════════════════════════════════════════
+function toggleChip(btn) {
+  const { sec, dim, val } = btn.dataset;
+  const set = filterState[sec][dim];
+  if (set.has(val)) { set.delete(val); btn.classList.remove('active'); }
+  else              { set.add(val);    btn.classList.add('active'); }
+  applyFilters(sec);
+}
+
+function clearFilters(sec) {
+  ['cat','marca','estado'].forEach(dim => {
+    filterState[sec][dim].clear();
+    document.querySelectorAll(`[data-sec="${sec}"][data-dim="${dim}"]`).forEach(b => b.classList.remove('active'));
+  });
+  applyFilters(sec);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// APPLY FILTERS + RENDER
+// ═══════════════════════════════════════════════════════════════
+function applyFilters(sec) {
+  const { cat, marca, estado } = filterState[sec];
+  const data = dataMap[sec];
+
+  const filtered = data.filter(p => {
+    const catOk    = cat.size    === 0 || cat.has(p.categoria);
+    const marcaOk  = marca.size  === 0 || marca.has(getMarca(p, sec));
+    const estadoOk = estado.size === 0 || estado.has(normalizeEstado(p.estado));
+    return catOk && marcaOk && estadoOk;
+  });
+
+  renderGrid(sec, filtered);
+  updateFilterUI(sec, filtered.length, data.length);
+}
+
+function updateFilterUI(sec, shown, total) {
+  // Result count in toggle bar
+  document.getElementById(`rc-${sec}`).textContent = shown < total ? `${shown} de ${total}` : `${total} artículos`;
+  // Section count
+  document.getElementById(`sc-${sec}`).textContent = shown === total ? `${total} artículos` : `${shown} resultado${shown !== 1 ? 's' : ''}`;
+
+  // Active tags
+  const { cat, marca, estado } = filterState[sec];
+  const allActive = [
+    ...[...cat].map(v => ({ dim:'cat', val:v, label: catLabels[sec][v] || v })),
+    ...[...marca].map(v => ({ dim:'marca', val:v, label: v })),
+    ...[...estado].map(v => ({ dim:'estado', val:v, label: estadoLabel[v] })),
+  ];
+  document.getElementById(`tags-${sec}`).innerHTML = allActive.map(t =>
+    `<span class="active-tag">${t.label}<button onclick="event.stopPropagation();removeTag('${sec}','${t.dim}','${t.val}')">×</button></span>`
+  ).join('');
+
+  // Clear button visibility
+  const hasFilters = cat.size > 0 || marca.size > 0 || estado.size > 0;
+  document.getElementById(`clear-${sec}`).classList.toggle('visible', hasFilters);
+}
+
+function removeTag(sec, dim, val) {
+  filterState[sec][dim].delete(val);
+  document.querySelectorAll(`[data-sec="${sec}"][data-dim="${dim}"][data-val="${val}"]`).forEach(b => b.classList.remove('active'));
+  applyFilters(sec);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// RENDER GRID
+// ═══════════════════════════════════════════════════════════════
+const gridIds = { consolas:'gridConsolas', accesorios:'gridAccesorios', juegos:'gridJuegos' };
+
+function renderGrid(sec, data) {
+  const grid = document.getElementById(gridIds[sec]);
+  if (!data.length) {
+    grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1">
+      <div class="empty-state-icon">🔍</div>
+      <p>Sin resultados para esos filtros</p>
+      <span>Probá con otras combinaciones</span><br>
+      <button class="empty-state-reset" onclick="clearFilters('${sec}')">Limpiar filtros</button>
+    </div>`;
+    return;
+  }
+  grid.innerHTML = data.map(p => {
     const restante = stockDisponible(p.id);
     const sinStock = restante <= 0;
+    const estadoKey = normalizeEstado(p.estado);
     return `
     <div class="product-card" onclick="openModal('${p.id}')">
       <div class="product-img">${p.emoji}</div>
       <div class="product-info">
-        <span class="product-badge badge-${p.categoria}">${p.categoria.charAt(0).toUpperCase()+p.categoria.slice(1)}</span>
+        <div class="product-badges">
+          <span class="product-badge badge-${p.categoria}">${catLabels[sec]?.[p.categoria] || p.categoria}</span>
+          <span class="product-badge badge-estado-${estadoKey}">${estadoLabel[estadoKey]}</span>
+        </div>
         <div class="product-name">${p.nombre}</div>
-        <div class="product-year">${getSubtitle(p)} · ${p.anio}</div>
+        <div class="product-year">${getMarca(p,sec) || ''} · ${p.anio}</div>
         <div class="product-desc">${p.descripcion}</div>
         <div class="product-footer">
           <div>
@@ -363,51 +602,47 @@ function renderSection(seccion, filtro) {
   }).join('');
 }
 
-function getSubtitle(p) {
-  if (p.fabricante) return p.fabricante;
-  if (p.marca) return p.marca;
-  if (p.desarrolladora) return p.desarrolladora;
-  return '';
+// ═══════════════════════════════════════════════════════════════
+// TABS
+// ═══════════════════════════════════════════════════════════════
+function switchTab(tab) {
+  document.querySelectorAll('.catalog-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('section-' + tab).classList.add('active');
+  document.getElementById('tab-' + tab).classList.add('active');
 }
 
-// ─── MODAL ───────────────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════════
+// MODAL
+// ═══════════════════════════════════════════════════════════════
+function getSecOfItem(id) {
+  if (consolas.find(x=>x.id===id)) return 'consolas';
+  if (accesorios.find(x=>x.id===id)) return 'accesorios';
+  return 'juegos';
+}
+
 function openModal(id) {
   const p = allItems.find(x => x.id === id);
+  const sec = getSecOfItem(id);
   const restante = stockDisponible(id);
   const sinStock = restante <= 0;
   document.getElementById('mEmoji').textContent = p.emoji;
   document.getElementById('mName').textContent = p.nombre;
-  document.getElementById('mYear').textContent = `${getSubtitle(p)} · ${p.anio}`;
+  document.getElementById('mYear').textContent = `${getMarca(p,sec) || ''} · ${p.anio}`;
   document.getElementById('mPrice').textContent = `$${p.precio.toLocaleString('es-AR')}`;
 
-  // Build fields dynamically depending on item type
   let fields = [];
-  if (p.fabricante) { // consola
-    fields = [
-      ['Fabricante', p.fabricante], ['Categoría', p.categoria],
-      ['Procesador', p.procesador], ['RAM', p.ram],
-      ['Resolución', p.resolucion], ['Estado', p.estado],
-      ['Incluye', p.incluye],
-    ];
-  } else if (p.marca) { // accesorio
-    fields = [
-      ['Marca', p.marca], ['Tipo', p.tipo],
-      ['Compatibilidad', p.compatibilidad], ['Estado', p.estado],
-      ['Incluye', p.incluye],
-    ];
-  } else { // juego
-    fields = [
-      ['Plataforma', p.plataforma], ['Desarrolladora', p.desarrolladora],
-      ['Género', p.genero], ['Jugadores', p.jugadores],
-      ['Idioma', p.idioma], ['Estado', p.estado],
-    ];
+  if (sec === 'consolas') {
+    fields = [['Fabricante',p.fabricante],['Categoría',p.categoria],['Procesador',p.procesador],['RAM',p.ram],['Resolución',p.resolucion],['Estado',p.estado],['Incluye',p.incluye]];
+  } else if (sec === 'accesorios') {
+    fields = [['Marca',p.marca],['Tipo',p.tipo],['Compatibilidad',p.compatibilidad],['Estado',p.estado],['Incluye',p.incluye]];
+  } else {
+    fields = [['Plataforma',p.plataforma],['Desarrolladora',p.desarrolladora],['Género',p.genero],['Jugadores',p.jugadores],['Idioma',p.idioma],['Estado',p.estado]];
   }
   fields.push(['Stock disponible', sinStock ? '✕ Sin stock' : `${restante} unidades`]);
-
   document.getElementById('mFields').innerHTML = fields
     .map(([k,v]) => `<div class="field-row"><span class="field-label">${k}</span><span class="field-value">${v}</span></div>`)
     .join('');
-
   const btn = document.getElementById('mAddBtn');
   btn.textContent = sinStock ? 'Sin stock disponible' : 'Agregar al carrito';
   btn.disabled = sinStock;
@@ -418,14 +653,22 @@ function openModal(id) {
 function closeModal(e) { if (e.target === document.getElementById('modal')) closeModalDirect(); }
 function closeModalDirect() { document.getElementById('modal').classList.remove('open'); }
 
-// ─── CARRITO ─────────────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════════
+// CART
+// ═══════════════════════════════════════════════════════════════
+function stockDisponible(id) {
+  const p = allItems.find(x => x.id === id);
+  return p.stock - (cart[id] || 0);
+}
+function totalEnCarrito() { return Object.values(cart).reduce((s, q) => s + q, 0); }
+
 function addToCart(id) {
   if (stockDisponible(id) <= 0) { showToast('No hay más stock disponible', 'err'); return; }
   cart[id] = (cart[id] || 0) + 1;
   updateCart();
   const p = allItems.find(x => x.id === id);
   showToast(`${p.nombre} agregado ✓`, 'ok');
-  rerenderAll();
+  secciones.forEach(s => applyFilters(s));
 }
 
 function changeQty(id, delta) {
@@ -435,22 +678,7 @@ function changeQty(id, delta) {
   else if (next > p.stock) { showToast('No hay más stock disponible', 'err'); return; }
   else { cart[id] = next; }
   updateCart();
-  rerenderAll();
-}
-
-function rerenderAll() {
-  renderSection('consolas', 'todos');
-  renderSection('accesorios', 'todos');
-  renderSection('juegos', 'todos');
-  // re-apply active filters
-  ['consolas','accesorios','juegos'].forEach(sec => {
-    const activeFiltro = document.querySelector(`#section-${sec} .filter-btn.active`);
-    if (activeFiltro) {
-      const txt = activeFiltro.textContent.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
-      const mapFiltro = { todos:'todos', retro:'retro', clasico:'clasico', portatil:'portatil', arcade:'arcade', coleccionable:'coleccionable', control:'control', audio:'audio', video:'video', almacenamiento:'almacenamiento', cable:'cable', otros:'otro', accion:'accion', rpg:'rpg', plataformas:'plataformas', lucha:'lucha', carreras:'carreras', deportes:'deportes' };
-      renderSection(sec, mapFiltro[txt] || 'todos');
-    }
-  });
+  secciones.forEach(s => applyFilters(s));
 }
 
 function updateCart() {
@@ -465,8 +693,7 @@ function updateCart() {
   items.innerHTML = ids.map(id => {
     const p = allItems.find(x => x.id === id);
     const qty = cart[id];
-    return `
-    <div class="cart-item">
+    return `<div class="cart-item">
       <span class="cart-item-emoji">${p.emoji}</span>
       <div class="cart-item-info">
         <div class="cart-item-name">${p.nombre}</div>
@@ -490,7 +717,7 @@ function toggleCart() { document.getElementById('cartPanel').classList.toggle('o
 function checkout() {
   if (!totalEnCarrito()) { showToast('Agregá productos primero', 'err'); return; }
   cart = {}; updateCart(); toggleCart();
-  rerenderAll();
+  secciones.forEach(s => applyFilters(s));
   showToast('¡Compra realizada! Gracias por tu pedido 🎮', 'ok');
 }
 
@@ -500,10 +727,11 @@ function showToast(msg, type) {
   setTimeout(() => t.classList.remove('show'), 2500);
 }
 
-// ─── INIT ────────────────────────────────────────────────────────
-renderSection('consolas', 'todos');
-renderSection('accesorios', 'todos');
-renderSection('juegos', 'todos');
+// ═══════════════════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════════════════
+buildFilterPanels();
+secciones.forEach(s => applyFilters(s));
 updateCart();
 </script>
 </body>
